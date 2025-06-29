@@ -1,0 +1,51 @@
+.transaction-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 2px solid #85898d;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: white;
+    @media (max-width: 420px) {
+
+        flex-direction: column;
+
+    }
+    &-details {
+        text-align: center;
+    }
+    h3 {
+        font-family: Avenir, Helvetica, Arial, sans-serif;
+        margin-bottom: 0;
+        font-size: small;
+        font-weight: 500;
+    }
+
+    &_balance {
+        font-family: Avenir, Helvetica, Arial, sans-serif;
+        margin-bottom: 0;
+        font-weight: bold;
+        font-size: 25px;
+    }
+
+    &_balance_type {
+        font-family: Avenir, Helvetica, Arial, sans-serif;
+        margin-bottom: 0;
+        font-size: smaller;
+
+    }
+
+    &_button {
+        color: white;
+        background-color: #007bff;
+        padding: 10px 15px;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+        @media (max-width: 420px) {
+
+            margin:10px
+
+        }
+    }
+}

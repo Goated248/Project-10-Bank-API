@@ -22,8 +22,15 @@ const authSlice = createSlice({
             state.token = null;
             state.isAuthenticated = false;
         },
+        checkToken: (state) => {
+            const token = localStorage.getItem("token");
+            if (token) {
+                state.token = token;
+                state.isAuthenticated = true;
+            }
+        },
     },
 });
 
-export const { loginSuccess, logout } = authSlice.actions;
+export const { loginSuccess, logout,checkToken } = authSlice.actions;
 export default authSlice.reducer;

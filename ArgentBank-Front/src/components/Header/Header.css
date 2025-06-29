@@ -1,1 +1,33 @@
-/*# sourceMappingURL=Header.css.map */
+header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+@media (max-width: 420px) {
+  header {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+header .logo {
+  max-width: 100%;
+  width: 200px;
+}
+header .main-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-right: 10px;
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+}
+header .main-nav i {
+  margin-left: 20px;
+  color: #9c94a8;
+}
+header .nav-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}/*# sourceMappingURL=Header.css.map */

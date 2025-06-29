@@ -1,0 +1,9 @@
+footer {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid darkgray;
+  background-color: white;
+}/*# sourceMappingURL=Footer.css.map */

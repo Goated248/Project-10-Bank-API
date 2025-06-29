@@ -1,64 +1,82 @@
-import { getUserProfil } from "../../api/auth";
 import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchUser, updateNames } from "../../redux/slices/userSlice";
+import { updateUserProfil } from "../../api/api";
+import { RootState, AppDispatch } from "../../redux/store";
+import "./UserNameSetting.css";
 
 const UserNameSetting = () => {
-    const token = localStorage.getItem("token");
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState("");
+    const dispatch = useDispatch<AppDispatch>();
+  const token = useSelector((state: RootState) => state.auth.token);
 
-    useEffect(() => {
-        const fetchUser = async () => {
-            try {
-                setLoading(true);
-                if (!token) return;
-                const data = await getUserProfil(token);
-                setFirstName(data.firstName);
-                setLastName(data.lastName)
-            } catch (error) {
-                setError("Erreur lors de la récupération des données");
-            } finally {
-                setLoading(false);
-            }
-        };
-        fetchUser()
-    }, [token]);
+  const { firstName, lastName, status, error } = useSelector(
+    (state: RootState) => state.user
+  );
 
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
+  const [editedFirstName, setEditedFirstName] = useState("");
+  const [editedLastName, setEditedLastName] = useState("");
 
+  useEffect(() => {
+    if (token) {
+      dispatch(fetchUser(token));
     }
+  }, [token]);
 
-    
+  useEffect(() => {
+    setEditedFirstName(firstName);
+    setEditedLastName(lastName);
+  }, [firstName, lastName]);
 
-    if (loading) return <p>Chargement...</p>;
-    if (error) return <p>{error}</p>;
-    
-    return (
-        <div className="User">
-            <h2>Welcome back</h2>
-            <form onSubmit={handleSubmit}>
-                <input
-                    type="firstname"
-                    id="firstname"
-                    value={firstName}
-                    placeholder={firstName}
-                    readOnly
-                />
-                <input
-                    type="lastname"
-                    id="lastname"
-                    value={lastName}
-                    placeholder={lastName}
-                    readOnly
-                />
-                <button type="submit">Save</button>
-                
-            </form>
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!token) return;
+    try {
+      const updated = await updateUserProfil(token, editedFirstName, editedLastName);
+  
+      dispatch(updateNames({
+        firstName: updated.firstName,
+        lastName: updated.lastName
+      }));
+    } catch (err) {
+      console.error("Erreur sauvegarde:", err);
+    }
+  };
+  
+
+  const handleCancel = () => {
+    setEditedFirstName(firstName);
+    setEditedLastName(lastName);
+  };
+
+  return status === "loading" ? (
+    <p>Chargement...</p>
+  ) : status === "failed" ? (
+    <p>{error}</p>
+  ) : (
+    <div className="user">
+      <h2>Welcome back</h2>
+      <form onSubmit={handleSubmit}>
+        <div className="user-inputs">
+          <input
+            type="text"
+            id="firstname"
+            value={editedFirstName}
+            onChange={(e) => setEditedFirstName(e.target.value)}
+          />
+          <input
+            type="text"
+            id="lastname"
+            value={editedLastName}
+            onChange={(e) => setEditedLastName(e.target.value)}
+          />
         </div>
-    );
+        <div className="user-buttons">
+          <button type="submit">Save</button>
+          <button type="button" onClick={handleCancel}>Cancel</button>
+        </div>
+      </form>
+    </div>
+  );
 };
 
-
-export default UserNameSetting
+export default UserNameSetting;

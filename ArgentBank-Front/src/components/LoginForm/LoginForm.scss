@@ -1,0 +1,46 @@
+.login {
+    background-color: darkgray;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 400px;
+    border-radius: 20px;
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+
+    @media (max-width: 420px) {
+
+        width: 90%;
+        padding: 20px;
+        box-sizing: border-box;
+
+    }
+
+    .fa {
+        font-size: 3em;
+    }
+
+    &-form {
+
+        display: flex;
+        flex-direction: column;
+    }
+
+    &-mail,
+    &-password {
+        display: flex;
+        flex-direction: column;
+        margin-top: 15px;
+
+        label {
+            margin-bottom: 10px;
+        }
+    }
+
+    &-button {
+        margin: 15px 0 30px;
+        background-color: rgb(7, 179, 87);
+        border-radius: 10px;
+        border-style: none;
+    }
+}
