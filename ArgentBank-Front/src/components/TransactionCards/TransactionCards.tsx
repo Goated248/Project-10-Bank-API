@@ -6,7 +6,6 @@ interface TransactionCardProps {
     accountNumber: string;
     balance: string;
     balanceType: string;
-    onViewTransactions?: () => void;
   }
   
   const TransactionCard = ({
@@ -14,7 +13,6 @@ interface TransactionCardProps {
     accountNumber,
     balance,
     balanceType,
-    onViewTransactions,
   }: TransactionCardProps) => {
     return (
       <div className="transaction-card">
@@ -24,7 +22,7 @@ interface TransactionCardProps {
         <p className="transaction-card_balance_type">{balanceType}</p>
         </div>
         <div className="transaction-card-button">
-        <button className="transaction-card_button" onClick={onViewTransactions}>View transactions</button>
+        <button className="transaction-card_button" >View transactions</button>
         </div>
       </div>
     );

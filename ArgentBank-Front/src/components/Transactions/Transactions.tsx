@@ -33,7 +33,6 @@ const Transactions = () => {
           accountNumber={account.number}
           balance={account.balance}
           balanceType={account.balanceType}
-          onViewTransactions={() => console.log(`Viewing transactions for ${account.number}`)}
         />
       ))}
     </div>
