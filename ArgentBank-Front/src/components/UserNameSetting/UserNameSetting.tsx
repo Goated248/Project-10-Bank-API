@@ -6,15 +6,15 @@ import { RootState, AppDispatch } from "../../redux/store";
 import "./UserNameSetting.css";
 
 const UserNameSetting = () => {
-    const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useDispatch<AppDispatch>();
   const token = useSelector((state: RootState) => state.auth.token);
 
   const { firstName, lastName, status, error } = useSelector(
     (state: RootState) => state.user
   );
 
-  const [editedFirstName, setEditedFirstName] = useState("");
-  const [editedLastName, setEditedLastName] = useState("");
+  const [editedFirstName, setEditedFirstName] = useState<string>("");
+  const [editedLastName, setEditedLastName] = useState<string>("");
 
   useEffect(() => {
     if (token) {
@@ -32,7 +32,7 @@ const UserNameSetting = () => {
     if (!token) return;
     try {
       const updated = await updateUserProfil(token, editedFirstName, editedLastName);
-  
+
       dispatch(updateNames({
         firstName: updated.firstName,
         lastName: updated.lastName
@@ -41,7 +41,7 @@ const UserNameSetting = () => {
       console.error("Erreur sauvegarde:", err);
     }
   };
-  
+
 
   const handleCancel = () => {
     setEditedFirstName(firstName);

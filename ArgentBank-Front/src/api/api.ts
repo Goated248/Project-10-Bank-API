@@ -23,7 +23,7 @@ export const loginUser = async ({ email, password }: Login): Promise<string> => 
     }
 
     const data = await response.json();
-    console.log("Login API response:", data);
+
     return data.body.token;
 };
 

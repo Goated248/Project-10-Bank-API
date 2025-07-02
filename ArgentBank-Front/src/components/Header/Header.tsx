@@ -12,12 +12,12 @@ const Header = () => {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
 
- 
+
   const { firstName, status } = useSelector((state: RootState) => state.user);
 
   useEffect(() => {
     if (token) {
-      
+
       dispatch(fetchUser(token));
     }
   }, [token]);
@@ -28,7 +28,7 @@ const Header = () => {
     navigate("/");
   };
 
-  if (status === "loading") return <p>Loading...</p>; 
+  if (status === "loading") return <p>Loading...</p>;
   return (
     <header className="header">
       <img className="logo" src={logo} alt="Argent Bank logo" />
